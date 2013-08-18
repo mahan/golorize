@@ -29,7 +29,7 @@ var tag *regexp.Regexp
 var Enabled bool = true
 
 func Ansify(str string) string {
-  cstack := make([]string, 3)
+  cstack := make([]string, 0)
 
   for tag.MatchString(str) {
     matches := tag.FindStringSubmatch(str)
@@ -37,17 +37,16 @@ func Ansify(str string) string {
 
     if Enabled {
       if orig == "]" {
-        cstack = cstack[:len(cstack)-2]
+        cstack = cstack[:len(cstack)-1]
       } else {
         name := matches[1]
         if code, exists := ansicodes[name]; exists {
           cstack = append(cstack, code)
         }
-
       }
-      str = strings.Replace(str, orig, ansicodes["reset"] + strings.Join(cstack, ""), -1)
+      str = strings.Replace(str, orig, ansicodes["reset"] + strings.Join(cstack, ""), 1)
     } else {
-      str = strings.Replace(str, orig, "", -1)
+      str = strings.Replace(str, orig, "", 1)
     }
   } //for
   return str
