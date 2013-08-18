@@ -37,7 +37,7 @@ func Ansify(str string) string {
 
     if Enabled {
       if orig == "]" {
-        cstack = cstack[:len(cstack)-1]
+        cstack = cstack[:len(cstack)-2]
       } else {
         name := matches[1]
         if code, exists := ansicodes[name]; exists {
