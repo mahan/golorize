@@ -45,7 +45,6 @@ func Ansify(str string) string {
         }
 
       }
-      //str = str.replace(orig, this.ansicodes.reset + cstack.join(''));
       str = strings.Replace(str, orig, ansicodes["reset"] + strings.Join(cstack, ""), -1)
     } else {
       str = strings.Replace(str, orig, "", -1)
